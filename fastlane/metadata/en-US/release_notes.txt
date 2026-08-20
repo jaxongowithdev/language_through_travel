@@ -1,0 +1,9 @@
+First release.
+
+• Four travel stages that unlock in order: airport, hotel, restaurant, taxi
+• English, Japanese, Korean and Thai, with romanisation and pronunciation
+• Phrasebook with search, filters and starred favourites
+• Four practice games, all feeding the same review schedule
+• Travel guide: emergencies, numbers, money, directions, etiquette, pronunciation
+• Spaced repetition, daily goal, streak, activity map and badges
+• Fully offline, no account, no ads

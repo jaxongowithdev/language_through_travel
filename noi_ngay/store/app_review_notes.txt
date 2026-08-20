@@ -1,0 +1,54 @@
+NO ACCOUNT REQUIRED. No login, no demo credentials, no sample files, no server. Install and open.
+
+WHAT THE APP DOES
+Noi Ngay ("Speak Now") trains Vietnamese speakers to produce spoken English in the situations that repeat every week: greetings and small talk, introducing yourself, your daily routine, numbers and appointments, weather, family, city transport, shopping and returns, food and taste, making plans, phone calls and texting, renting and household problems, health and pharmacy, banking and spending, the workplace, meetings, work email, job interviews, emotions and encouragement, apologising and saying no.
+
+The method is deliberate: every drill runs Vietnamese to English, never the reverse. The learner sees the Vietnamese meaning first, says the English out loud, and only then reveals the answer. Recognition is not the goal; production is.
+
+Interface language: Vietnamese. Target language: English only.
+
+CONTENT SHIPPED IN THE BINARY
+20 topics, 60 lessons, 480 spoken sentences with usage notes.
+20 sample dialogues, 160 conversation turns.
+200 vocabulary entries with IPA and bilingual examples.
+284 reference entries: 41 grammar points, 60 phrasal verbs, 50 idioms, 89 irregular verbs, 44 IPA sounds.
+40 study tips, one surfaced per day.
+1,164 content items in total. All of it is written by us as static Dart source compiled into the binary.
+
+HOW TO REACH EVERY FEATURE
+NOTHING IS LOCKED. All 20 topics, all 60 lessons and all 5 reference sections are open from the first launch. There is no sequential unlock, no gate, no paywall. If a screen looks empty it is because the learner has no progress yet, not because content is withheld.
+
+First launch shows one screen: pick a daily goal (6, 12, 20 or 30 sentences), tap "Bắt đầu học" (Start learning). No account, no permissions, no questions.
+
+Four bottom tabs, left to right:
+1 Hôm nay (Today) — daily goal ring, streak, review queue, sentence of the day, tip of the day, seven-day bar chart, shortcuts.
+2 Chủ đề (Topics) — a segmented control switches between "Bài học" (the 20 topics) and "Sổ tay" (the 5 reference sections). Open any topic to see 3 lessons, 1 dialogue and 10 vocabulary entries.
+3 Luyện tập (Practice) — the review session plus four drills: fill in the blank, word order, listen and choose, 60-second meaning match. There is also a shadowing mode with an adjustable speech rate. Choose the "Tất cả chủ đề" (All topics) pool to play immediately.
+4 Cá nhân (Profile) — statistics, 12 milestones, saved sentences, settings, and an "Về ứng dụng" (About) screen that repeats this information inside the app.
+
+REVIEW SCHEDULING
+Sentences are scheduled with a five-box Leitner system. Fixed intervals: box 1 returns within the same session, then 1, 3, 7 and 16 days. A sentence in box 5 counts as learned. Drill results feed the same boxes.
+
+WHAT THE APP DOES NOT HAVE
+No account registration, login, or account deletion. No in-app purchase, subscription, paid tier or trial. No advertising. No user-generated content, therefore no reporting or blocking mechanism is needed. No permission prompts of any kind: no location, contacts, camera, photos, microphone, notifications or App Tracking Transparency. No usage description strings are declared because no permission is requested.
+
+EXTERNAL SERVICES
+None. The app makes no network requests. No backend, no analytics, no advertising SDK, no authentication provider, no payment processor, no AI or machine-learning service. Every screen works in Airplane Mode.
+
+The only system service used is the on-device speech synthesiser (AVSpeechSynthesizer on iOS), reached through the open-source Flutter plugin flutter_tts, and only when the user taps a speaker button. The app never records audio and never requests microphone access.
+
+Open-source packages: provider (state management), shared_preferences (local key-value storage), flutter_tts (system speech). Progress is stored locally through shared_preferences and never leaves the device. The privacy questionnaire is set to Data Not Collected.
+
+A NOTE ON THE SPEAKER BUTTONS
+Speech uses whatever English voice the test device has installed. English voices ship on every iOS device, so audio should work out of the box. If a voice is missing the system returns silence and the app stays silent rather than showing an error; every listening drill also has a "Hiện chữ" (Show text) button so it remains playable without audio.
+
+REGIONAL DIFFERENCES
+None. Identical behaviour in every region and storefront. No geo-detection, no region gating, no remote configuration, no server-side content. Every user receives the same bundled content regardless of country, device region or system language.
+
+REGULATED INDUSTRY / THIRD-PARTY MATERIAL
+Not applicable. No financial, medical, legal, gambling, health, dating or government services. The topic "Sức khoẻ & đi khám" teaches phrases for a doctor visit; it gives no medical advice, no diagnosis and no dosage guidance. The topic "Ngân hàng & chi tiêu" teaches phrases used at a bank counter; it offers no financial service or advice.
+
+All sentences, dialogues, vocabulary, grammar explanations, artwork and the app icon are original and produced by us. No third-party trademarks, licensed course material, copyrighted text or brand names are used.
+
+TESTED ON
+iPhone <MODEL> iOS <VERSION>, iPhone <MODEL> iOS <VERSION>, iPad <MODEL> iPadOS <VERSION>, all physical devices.

@@ -1,0 +1,287 @@
+// Nội dung chủ đề 6–10: gia đình và bạn bè, đi lại trong thành phố, mua sắm,
+// đồ ăn và khẩu vị, hẹn gặp bạn bè. Quy ước bảng xem lib/data/parser.dart.
+
+// --- 6. family -------------------------------------------------------------
+
+const List<String> familyLines = <String>[
+  "#|Người thân|Giới thiệu gia đình mà không liệt kê khô khan",
+  "I have one older sister and a younger brother.|Mình có một chị gái và một em trai.|Tiếng Anh phân biệt older và younger chứ không có từ riêng như anh chị em.",
+  "My parents live about two hours away.|Bố mẹ mình sống cách đây chừng hai tiếng.|Two hours away nghĩa là mất hai tiếng để tới.",
+  "My grandmother raised me while my parents worked.|Bà nội nuôi mình trong lúc bố mẹ đi làm.|Raise someone nghĩa là nuôi dạy.",
+  "We're a pretty close family.|Nhà mình khá gắn bó.|Close family nghĩa là thân thiết, không phải gần về địa lý.",
+  "My cousin is more like a brother to me.|Anh họ mình thân như anh ruột.|More like something là cách nói ví von rất tự nhiên.",
+  "I take after my dad, apparently.|Nghe nói mình giống bố.|Take after someone nghĩa là giống người thân về nét hoặc tính.",
+  "We all get together at Tet.|Cả nhà tụ họp dịp Tết.|Get together nghĩa là tụ họp.",
+  "My in-laws live upstairs, which is interesting.|Bố mẹ chồng mình ở tầng trên, cũng thú vị.|In-laws là họ hàng bên vợ hoặc chồng.",
+  "#|Bạn bè|Kể về bạn thân và các mối quan hệ",
+  "We've been friends since primary school.|Bọn mình chơi với nhau từ hồi tiểu học.|Since đi với mốc thời gian, for đi với khoảng thời gian.",
+  "She's the one who always remembers birthdays.|Cô ấy là người luôn nhớ sinh nhật mọi người.|Mệnh đề quan hệ với who để tả người.",
+  "We don't talk every day, but nothing changes.|Bọn mình không nói chuyện mỗi ngày, nhưng chẳng có gì đổi.|Câu mô tả tình bạn lâu năm rất hay dùng.",
+  "He introduced me to my wife, actually.|Thật ra chính cậu ấy giới thiệu vợ mình.|Introduce someone to someone.",
+  "We drifted apart after university.|Bọn mình xa dần sau khi ra trường.|Drift apart nghĩa là dần mất liên lạc.",
+  "I'd trust her with anything.|Chuyện gì mình cũng tin tưởng cô ấy được.|Trust someone with something.",
+  "We have a group chat that never sleeps.|Bọn mình có nhóm chat không bao giờ ngủ.|Cách nói vui về nhóm chat lúc nào cũng có tin.",
+  "He's more of an acquaintance than a friend.|Anh ấy là người quen hơn là bạn.|More of A than B để phân biệt mức độ.",
+  "#|Chuyện nhà|Nói về những va chạm và niềm vui thường ngày",
+  "My son is at that age where everything is no.|Con trai mình đang tuổi cái gì cũng không.|Mệnh đề where dùng cho giai đoạn, không chỉ nơi chốn.",
+  "We take turns cooking.|Bọn mình thay phiên nấu ăn.|Take turns doing something.",
+  "My mum still sends me food every week.|Mẹ mình tuần nào cũng gửi đồ ăn.|Mum kiểu Anh, mom kiểu Mỹ.",
+  "We argue about small things and forget by dinner.|Bọn mình cãi nhau chuyện vặt rồi tới bữa tối là quên.|Argue about something.",
+  "My dad calls just to ask if I've eaten.|Bố mình gọi chỉ để hỏi ăn cơm chưa.|Just to do something nghĩa là chỉ để làm việc gì.",
+  "The kids are staying with my sister this week.|Tuần này bọn trẻ ở nhà chị mình.|Stay with someone nghĩa là ở nhờ nhà ai.",
+  "We're saving up for a bigger place.|Bọn mình đang tích cóp mua chỗ rộng hơn.|Save up for something nghĩa là để dành mua gì.",
+  "Family dinners are loud and I love them.|Bữa cơm cả nhà ồn ào và mình rất thích.|Câu ngắn nhưng nhiều cảm xúc, hợp để kể chuyện.",
+];
+
+const List<String> familyWords = <String>[
+  "sibling|/ˈsɪblɪŋ/|n|anh chị em ruột|I have two siblings.|Mình có hai anh chị em.",
+  "relative|/ˈrelətɪv/|n|họ hàng|We invited about forty relatives.|Bọn mình mời khoảng bốn mươi họ hàng.",
+  "household|/ˈhaʊshoʊld/|n|hộ gia đình|There are five of us in the household.|Nhà mình có năm người.",
+  "upbringing|/ˈʌpbrɪŋɪŋ/|n|sự nuôi dạy|We had a strict upbringing.|Bọn mình được dạy nghiêm khắc.",
+  "spoil|/spɔɪl/|v|nuông chiều|Grandparents always spoil the kids.|Ông bà lúc nào cũng chiều cháu.",
+  "reunion|/riːˈjuːniən/|n|buổi họp mặt|Our class reunion is next month.|Buổi họp lớp là tháng sau.",
+  "supportive|/səˈpɔːrtɪv/|adj|hay ủng hộ, chỗ dựa|My partner is very supportive.|Bạn đời mình rất là chỗ dựa.",
+  "argument|/ˈɑːrɡjumənt/|n|cuộc tranh cãi|It was a silly argument.|Đó là một cuộc cãi vã vớ vẩn.",
+  "make up|/meɪk ʌp/|phr|làm lành|They made up the next day.|Hôm sau họ làm lành.",
+  "godparent|/ˈɡɑːdperənt/|n|cha mẹ đỡ đầu|She is my daughter's godparent.|Cô ấy là mẹ đỡ đầu của con gái mình.",
+];
+
+const List<String> familyTalk = <String>[
+  "#|Khoe ảnh gia đình|Hai đồng nghiệp ngồi chờ họp",
+  "Ngọc|Is that your family in your phone case?|Ảnh trong ốp điện thoại là gia đình bạn à?",
+  ">Bạn|Yes, that was Tet two years ago.|Đúng rồi, ảnh chụp Tết hai năm trước.",
+  "Ngọc|How many of you are there?|Nhà bạn mấy người thế?",
+  ">Bạn|Nine, if you count my aunt and her kids.|Chín, nếu tính cả dì mình và các em.",
+  "Ngọc|Wow. Do you all live nearby?|Chà. Cả nhà ở gần nhau à?",
+  ">Bạn|Most of us. My brother is in Germany though.|Phần lớn thì gần. Nhưng anh mình ở Đức.",
+  "Ngọc|That must be hard at holidays.|Chắc dịp lễ cũng chạnh lòng nhỉ.",
+  ">Bạn|It is, but we call every Sunday.|Cũng có, nhưng Chủ nhật nào cả nhà cũng gọi.",
+];
+
+// --- 7. transport ----------------------------------------------------------
+
+const List<String> transportLines = <String>[
+  "#|Xe buýt và tàu điện|Hỏi tuyến, mua vé, xuống đúng bến",
+  "Does this bus go to the central market?|Xe buýt này có tới chợ trung tâm không ạ?|Go to somewhere cho phương tiện chạy tuyến nào.",
+  "Which line should I take for the museum?|Tôi nên đi tuyến nào để tới bảo tàng ạ?|Line dùng cho tuyến tàu điện, route cho tuyến xe buýt.",
+  "How many stops is it from here?|Từ đây còn mấy bến nữa ạ?|Stop là bến dọc đường, station là nhà ga.",
+  "Do I need to change trains?|Tôi có phải đổi tàu không ạ?|Change trains luôn ở dạng số nhiều.",
+  "Could you tell me when to get off?|Tới nơi bác nhắc tôi xuống với nhé?|Get off cho xe buýt, tàu; get out of cho ô tô con.",
+  "Is there a day pass?|Có vé ngày không ạ?|Day pass là vé đi cả ngày không giới hạn.",
+  "I think I got on the wrong one.|Hình như tôi lên nhầm xe rồi.|Get on là lên xe, get off là xuống xe.",
+  "The next one comes in twelve minutes.|Chuyến sau mười hai phút nữa tới.|Cấu trúc in plus khoảng thời gian cho tương lai gần.",
+  "#|Xe công nghệ và taxi|Gọi xe, chỉ chỗ đón, xử lý sự cố",
+  "I'm the one in the blue jacket, by the gate.|Tôi là người mặc áo khoác xanh, đứng cạnh cổng.|Mẫu câu mô tả để tài xế nhận ra bạn.",
+  "Could you wait two minutes? I'm coming down.|Anh chờ hai phút nhé, tôi đang xuống.|Coming down cho việc đi xuống từ tầng trên.",
+  "Can you pull over just after the bridge?|Anh tấp vào ngay sau cầu giúp tôi nhé?|Pull over nghĩa là tấp xe vào lề.",
+  "The app says the fare is already paid.|Ứng dụng báo là đã thanh toán rồi ạ.|Fare là tiền cước, fee là phí dịch vụ.",
+  "Sorry, I set the wrong pickup point.|Xin lỗi, tôi đặt sai điểm đón.|Pickup point là điểm đón, drop-off point là điểm trả.",
+  "Could you take the road along the river?|Anh đi đường ven sông giúp tôi được không?|Take a road nghĩa là đi theo con đường nào.",
+  "Is there a lot of traffic at this hour?|Giờ này đường có đông không ạ?|At this hour nghĩa là vào giờ này.",
+  "You can drop me at the corner.|Anh cho tôi xuống ở góc phố là được.|Drop someone at somewhere.",
+  "#|Đi xe máy và tự lái|Đổ xăng, gửi xe, hỏi đường",
+  "Where can I park around here?|Quanh đây gửi xe ở đâu ạ?|Park là động từ đỗ xe, parking là chỗ đỗ.",
+  "Fill it up, please.|Đổ đầy bình giúp tôi.|Fill it up là câu cố định ở cây xăng.",
+  "My tyre feels a bit flat.|Lốp xe tôi hình như hơi non.|Flat tyre là lốp xẹp; tyre kiểu Anh, tire kiểu Mỹ.",
+  "Is this a one-way street?|Đây là đường một chiều à ạ?|One-way street là đường một chiều.",
+  "How much is parking for two hours?|Gửi xe hai tiếng bao nhiêu ạ?|Parking không đếm được nên không thêm s.",
+  "I got a fine for parking there last time.|Lần trước tôi bị phạt vì đỗ chỗ đó.|Get a fine nghĩa là bị phạt tiền.",
+  "Take the second exit at the roundabout.|Ra lối thứ hai ở vòng xuyến.|Roundabout là vòng xuyến, exit là lối ra.",
+  "I always use the map, even in my own city.|Ngay ở thành phố mình sống tôi vẫn dùng bản đồ.|Even ở đây nhấn ý ngay cả khi.",
+];
+
+const List<String> transportWords = <String>[
+  "fare|/fer/|n|tiền vé, tiền cước|The fare went up last month.|Tiền cước tăng từ tháng trước.",
+  "rush hour|/rʌʃ aʊər/|n|giờ cao điểm|Avoid the bridge at rush hour.|Tránh cầu vào giờ cao điểm.",
+  "detour|/ˈdiːtʊr/|n|đường vòng|We took a long detour.|Bọn mình phải đi vòng khá xa.",
+  "congestion|/kənˈdʒestʃən/|n|tình trạng tắc nghẽn|Traffic congestion is worse in the rain.|Trời mưa thì tắc đường tệ hơn.",
+  "pedestrian|/pəˈdestriən/|n|người đi bộ|Use the pedestrian crossing.|Đi ở vạch dành cho người đi bộ.",
+  "commuter|/kəˈmjuːtər/|n|người đi làm xa|The train is full of commuters.|Tàu đầy người đi làm.",
+  "helmet|/ˈhelmɪt/|n|mũ bảo hiểm|Always wear a helmet.|Luôn đội mũ bảo hiểm.",
+  "lane|/leɪn/|n|làn đường|Stay in the right lane.|Đi ở làn bên phải.",
+  "shortcut|/ˈʃɔːrtkʌt/|n|đường tắt|I know a shortcut from here.|Từ đây mình biết một đường tắt.",
+  "breakdown|/ˈbreɪkdaʊn/|n|sự hỏng xe|We had a breakdown on the highway.|Xe bọn mình hỏng trên cao tốc.",
+];
+
+const List<String> transportTalk = <String>[
+  "#|Hỏi đường trên xe buýt|Trên xe buýt đông người, giữa trưa",
+  "Phụ xe|Tickets, please.|Cho xin vé ạ.",
+  ">Bạn|One to the art museum, please.|Cho tôi một vé tới bảo tàng mỹ thuật.",
+  "Phụ xe|That is fifteen thousand. It is six stops.|Mười lăm nghìn ạ. Sáu bến nữa.",
+  ">Bạn|Could you tell me when we are close?|Gần tới bác nhắc tôi với nhé?",
+  "Phụ xe|Sure. Sit near the door if you can.|Được. Ngồi gần cửa cho tiện.",
+  ">Bạn|Thanks. Is there a stop at the old bridge too?|Cảm ơn bác. Có bến ở cầu cũ luôn không ạ?",
+  "Phụ xe|Yes, but the museum stop is closer.|Có, nhưng bến bảo tàng gần hơn.",
+  ">Bạn|Got it. Thank you very much.|Cháu rõ rồi. Cảm ơn bác nhiều.",
+];
+
+// --- 8. shopping -----------------------------------------------------------
+
+const List<String> shoppingLines = <String>[
+  "#|Tìm và thử đồ|Hỏi hàng, hỏi cỡ, thử trước khi mua",
+  "Do you have this in a medium?|Cái này có cỡ M không ạ?|Small, medium, large viết tắt là S, M, L.",
+  "Where are the fitting rooms?|Phòng thử đồ ở đâu ạ?|Fitting room kiểu Anh, dressing room kiểu Mỹ.",
+  "I'm just browsing, thanks.|Tôi chỉ xem thôi, cảm ơn.|Câu lịch sự để nhân viên không bám theo.",
+  "Does this come in another colour?|Cái này có màu khác không ạ?|Come in colour hoặc come in size là mẫu cố định.",
+  "It's a bit tight around the shoulders.|Chỗ vai hơi chật một chút.|Tight là chật, loose là rộng.",
+  "Could you check if you have it in stock?|Anh kiểm tra giúp còn hàng không ạ?|In stock là còn hàng, out of stock là hết hàng.",
+  "I'll take this one.|Tôi lấy cái này.|Take ở đây nghĩa là chọn mua.",
+  "Do you sell gift cards?|Ở đây có bán thẻ quà tặng không ạ?|Gift card là thẻ quà tặng.",
+  "#|Giá cả và thanh toán|Hỏi giá, khuyến mại, trả tiền",
+  "How much is this altogether?|Tất cả hết bao nhiêu ạ?|Altogether nghĩa là tổng cộng.",
+  "Is this the sale price or the original one?|Đây là giá khuyến mại hay giá gốc ạ?|Sale price và original price là hai giá.",
+  "Can I pay by card?|Tôi trả bằng thẻ được không ạ?|Pay by card, pay in cash.",
+  "Do you take mobile payments?|Ở đây nhận chuyển khoản qua điện thoại không ạ?|Take ở đây nghĩa là chấp nhận hình thức nào.",
+  "Could I have a receipt, please?|Cho tôi xin hoá đơn với ạ.|Receipt có chữ p câm.",
+  "Is there any discount if I buy two?|Mua hai cái có giảm giá không ạ?|Discount là giảm giá.",
+  "That's more than I wanted to spend.|Cái này đắt hơn mức tôi định chi.|Cách từ chối lịch sự vì giá.",
+  "Sorry, I've changed my mind.|Xin lỗi, tôi đổi ý rồi.|Change one's mind là cụm cố định.",
+  "#|Đổi trả và khiếu nại|Xử lý khi hàng lỗi hoặc mua nhầm",
+  "I'd like to return this, please.|Tôi muốn trả lại món này ạ.|Return là trả hàng, exchange là đổi hàng.",
+  "It stopped working after two days.|Nó hỏng sau hai ngày dùng.|Stop working nghĩa là ngừng hoạt động.",
+  "I have the receipt right here.|Hoá đơn tôi có ngay đây ạ.|Right here nhấn mạnh ngay tại đây.",
+  "Can I exchange it for a bigger size?|Tôi đổi sang cỡ lớn hơn được không ạ?|Exchange something for something.",
+  "There's a small tear on the sleeve.|Tay áo có một vết rách nhỏ.|Tear đọc là ter khi nghĩa là vết rách.",
+  "How long is the warranty?|Bảo hành bao lâu ạ?|Warranty là bảo hành, guarantee là cam kết.",
+  "Could I speak to the manager, please?|Cho tôi gặp quản lý được không ạ?|Speak to someone lịch sự hơn talk to.",
+  "I'd prefer a refund if that's possible.|Nếu được thì tôi muốn hoàn tiền hơn.|Refund là hoàn tiền, store credit là phiếu mua hàng.",
+];
+
+const List<String> shoppingWords = <String>[
+  "receipt|/rɪˈsiːt/|n|hoá đơn|Keep the receipt just in case.|Giữ hoá đơn phòng khi cần.",
+  "refund|/ˈriːfʌnd/|n, v|hoàn tiền|They gave me a full refund.|Họ hoàn lại toàn bộ tiền cho mình.",
+  "bargain|/ˈbɑːrɡɪn/|n, v|món hời, mặc cả|That jacket was a real bargain.|Cái áo khoác đó đúng là món hời.",
+  "afford|/əˈfɔːrd/|v|đủ tiền mua|I can't afford it right now.|Giờ mình chưa đủ tiền mua.",
+  "brand|/brænd/|n|thương hiệu|I don't care much about brands.|Mình không quan trọng thương hiệu lắm.",
+  "queue|/kjuː/|n, v|hàng chờ, xếp hàng|The queue moved fast.|Hàng chờ đi khá nhanh.",
+  "cashier|/kæˈʃɪr/|n|thu ngân|Pay the cashier at the front.|Trả tiền ở quầy thu ngân phía trước.",
+  "faulty|/ˈfɔːlti/|adj|bị lỗi|The item was faulty.|Món hàng bị lỗi.",
+  "warranty|/ˈwɔːrənti/|n|bảo hành|It has a two-year warranty.|Sản phẩm bảo hành hai năm.",
+  "second-hand|/ˌsekəndˈhænd/|adj|đồ cũ, đã qua sử dụng|I bought it second-hand.|Mình mua lại đồ cũ.",
+];
+
+const List<String> shoppingTalk = <String>[
+  "#|Đổi một chiếc áo|Quầy dịch vụ khách hàng của một cửa hàng thời trang",
+  "Nhân viên|Hi, how can I help?|Chào anh chị, em giúp gì được ạ?",
+  ">Bạn|I bought this on Sunday and it doesn't fit.|Tôi mua cái này hôm Chủ nhật mà không vừa.",
+  "Nhân viên|No problem. Do you have the receipt?|Không sao ạ. Anh chị có hoá đơn không?",
+  ">Bạn|Yes, here you go. Can I exchange it for a large?|Có đây ạ. Tôi đổi sang cỡ L được không?",
+  "Nhân viên|Let me check the stock. One moment.|Để em kiểm tra hàng. Anh chị chờ chút.",
+  ">Bạn|Take your time.|Bạn cứ từ từ.",
+  "Nhân viên|We have one left, in navy. Is that alright?|Còn đúng một chiếc, màu xanh navy. Anh chị thấy được không ạ?",
+  ">Bạn|Navy is fine. Thank you for checking.|Navy cũng được. Cảm ơn bạn đã kiểm tra.",
+];
+
+// --- 9. food ---------------------------------------------------------------
+
+const List<String> foodLines = <String>[
+  "#|Khẩu vị của bạn|Nói bạn thích và không ăn được món gì",
+  "I'm not a big fan of coriander.|Mình không khoái rau mùi lắm.|Not a big fan of something là cách chê nhẹ nhàng.",
+  "I can eat spicy food, but not that spicy.|Mình ăn cay được, nhưng không cay tới mức đó.|Nhắc lại that plus tính từ để nhấn mức độ.",
+  "I'm allergic to shellfish.|Mình dị ứng hải sản có vỏ.|Be allergic to something, luôn dùng to.",
+  "I've been trying to eat less meat.|Dạo này mình cố ăn ít thịt lại.|Hiện tại hoàn thành tiếp diễn cho một nỗ lực đang diễn ra.",
+  "It's an acquired taste.|Món này ăn quen mới thấy ngon.|Câu cố định cho món khó ăn lần đầu.",
+  "I could eat noodles every single day.|Mình có thể ăn mì mỗi ngày luôn.|Every single day nhấn hơn every day.",
+  "This is exactly how my mum makes it.|Đúng vị mẹ mình nấu luôn.|Exactly how someone does something.",
+  "I'd rather have something light tonight.|Tối nay mình muốn ăn gì nhẹ nhẹ hơn.|Would rather plus động từ nguyên mẫu không to.",
+  "#|Nấu nướng|Kể chuyện bếp núc và chia sẻ công thức",
+  "I burn rice about once a month.|Mỗi tháng mình khét nồi cơm chừng một lần.|Burn something nghĩa là làm cháy khét.",
+  "Let it simmer for twenty minutes.|Để lửa liu riu hai mươi phút.|Simmer là sôi lăn tăn, boil là sôi sùng sục.",
+  "Add a pinch of salt at the end.|Cuối cùng cho một nhúm muối.|A pinch of salt là một nhúm muối.",
+  "I never measure anything, I just taste.|Mình chẳng đong đếm gì, cứ nếm thôi.|Measure là đong, taste là nếm.",
+  "The recipe is on my phone somewhere.|Công thức nằm đâu đó trong điện thoại mình.|Somewhere ở cuối câu nghĩa là đâu đó.",
+  "Leave it to rest before you cut it.|Để nghỉ một lát rồi hãy cắt.|Rest dùng cho thịt sau khi nấu.",
+  "I always double the garlic.|Mình lúc nào cũng cho gấp đôi tỏi.|Double something nghĩa là tăng gấp đôi.",
+  "It tastes better the next day.|Hôm sau ăn còn ngon hơn.|Taste plus tính từ, không cần thêm like.",
+  "#|Rủ nhau ăn uống|Mời, gợi ý quán và chia tiền",
+  "Have you tried the new place on Ly Thuong Kiet?|Bạn thử quán mới trên đường Lý Thường Kiệt chưa?|Have you tried là cách gợi ý quán tự nhiên.",
+  "Their broth is the real deal.|Nước dùng ở đó đúng bài luôn.|The real deal nghĩa là hàng thật, xịn.",
+  "It's my treat this time.|Lần này mình mời.|My treat nghĩa là mình trả tiền.",
+  "Shall we split the bill?|Hay mình chia đôi hoá đơn nhé?|Split the bill là chia đều tiền.",
+  "I'm starving, let's order.|Đói lắm rồi, gọi món đi.|Starving nhấn hơn hungry nhiều.",
+  "Do you want to share a couple of dishes?|Hay mình gọi vài món ăn chung nhé?|Share a dish là gọi món dùng chung.",
+  "That was way too much food.|Món nhiều quá đà luôn.|Way too much là quá nhiều một cách rõ rệt.",
+  "We should come back here.|Hôm nào quay lại đây nữa nhé.|Should ở đây là gợi ý, không phải bắt buộc.",
+];
+
+const List<String> foodWords = <String>[
+  "ingredient|/ɪnˈɡriːdiənt/|n|nguyên liệu|The main ingredient is coconut milk.|Nguyên liệu chính là nước cốt dừa.",
+  "leftover|/ˈleftoʊvər/|n, adj|đồ ăn thừa|We fried the leftover rice.|Bọn mình rang chỗ cơm thừa.",
+  "flavour|/ˈfleɪvər/|n|hương vị|The flavour is quite mild.|Vị khá nhẹ.",
+  "savoury|/ˈseɪvəri/|adj|mặn, đậm vị, không ngọt|I prefer savoury breakfasts.|Mình thích bữa sáng mặn hơn.",
+  "crispy|/ˈkrɪspi/|adj|giòn|The skin was perfectly crispy.|Phần da giòn rụm.",
+  "bland|/blænd/|adj|nhạt nhẽo|The soup was a bit bland.|Món canh hơi nhạt.",
+  "portion|/ˈpɔːrʃn/|n|khẩu phần|The portions here are huge.|Khẩu phần ở đây rất lớn.",
+  "vegetarian|/ˌvedʒəˈteriən/|n, adj|người ăn chay, thuộc đồ chay|Do you have vegetarian options?|Ở đây có món chay không ạ?",
+  "craving|/ˈkreɪvɪŋ/|n|cơn thèm ăn|I have a craving for something sweet.|Mình đang thèm đồ ngọt.",
+  "seasoning|/ˈsiːzənɪŋ/|n|gia vị nêm|Adjust the seasoning at the end.|Cuối cùng nêm lại cho vừa.",
+];
+
+const List<String> foodTalk = <String>[
+  "#|Rủ đồng nghiệp ăn trưa|Hành lang văn phòng, gần trưa",
+  "Quân|Any lunch plans?|Trưa nay có kế hoạch gì chưa?",
+  ">Bạn|Not yet. I'm starving though.|Chưa. Mà đói lắm rồi.",
+  "Quân|There's a new noodle place two blocks away.|Có quán mì mới cách đây hai dãy nhà.",
+  ">Bạn|Is it spicy? I can't handle very spicy food.|Cay không? Mình không ăn được cay lắm.",
+  "Quân|You can ask for mild. They are flexible.|Bạn xin ít cay được mà. Quán họ linh động.",
+  ">Bạn|Then I'm in. Should we invite Ngọc?|Vậy mình đi. Rủ Ngọc luôn không?",
+  "Quân|Good idea. She skipped breakfast too.|Ý hay. Cô ấy cũng bỏ bữa sáng.",
+  ">Bạn|Let's go before the queue gets long.|Đi sớm kẻo đông nhé.",
+];
+
+// --- 10. coffee ------------------------------------------------------------
+
+const List<String> coffeeLines = <String>[
+  "#|Rủ rê|Mời ai đó đi chơi mà không ngại bị từ chối",
+  "Are you free sometime this week?|Tuần này bạn có rảnh lúc nào không?|Sometime this week để ngỏ ngày giờ, dễ nhận lời.",
+  "Do you fancy a coffee after work?|Tan làm đi cà phê không?|Fancy something là cách rủ kiểu Anh.",
+  "A few of us are going. You should come.|Bọn mình mấy đứa đi đấy. Bạn đi cùng đi.|Nói có nhóm khiến lời mời nhẹ nhàng hơn.",
+  "No pressure if you're busy.|Bận thì thôi cũng không sao đâu.|Câu gỡ áp lực, rất được lòng người nghe.",
+  "How about Saturday morning instead?|Hay là sáng thứ Bảy nhé?|Instead ở cuối để đề xuất phương án thay thế.",
+  "I'll book a table for four.|Mình đặt bàn bốn người nhé.|Book a table for plus số người.",
+  "Let me know what works for you.|Bạn xem lúc nào tiện thì báo mình.|What works for you nghĩa là cái gì hợp lịch bạn.",
+  "Bring anyone you like.|Bạn muốn rủ ai thì cứ rủ.|Anyone you like nghĩa là ai cũng được.",
+  "#|Nhận lời và từ chối|Đáp lại lời mời sao cho giữ được quan hệ",
+  "I'd love to, count me in.|Mình thích chứ, tính mình một suất.|Count me in nghĩa là cho mình tham gia.",
+  "Sounds great, what time?|Nghe hay đấy, mấy giờ thế?|Đáp lại bằng một câu hỏi cho thấy bạn thật sự muốn đi.",
+  "I wish I could, but I'm working that day.|Ước gì mình đi được, mà hôm đó mình làm.|I wish I could là cách từ chối đầy tiếc nuối.",
+  "Can I let you know tomorrow?|Mai mình trả lời được không?|Let someone know nghĩa là báo lại cho ai.",
+  "I'm afraid I already have plans.|Tiếc là mình có hẹn trước rồi.|I'm afraid mở đầu lời từ chối lịch sự.",
+  "Maybe next time, for sure.|Lần sau nhé, chắc chắn luôn.|Thêm for sure để lời hẹn không sáo rỗng.",
+  "I'll be a little late, start without me.|Mình tới muộn chút, cứ bắt đầu trước đi.|Start without someone nghĩa là bắt đầu mà không chờ ai.",
+  "Thanks for thinking of me.|Cảm ơn bạn đã nhớ tới mình.|Câu cảm ơn ấm áp khi được rủ.",
+  "#|Trong buổi gặp|Gọi đồ, giữ nhịp trò chuyện và tính tiền",
+  "What are you having?|Bạn uống gì thế?|Have dùng cho cả đồ ăn lẫn đồ uống.",
+  "I'll have an iced coffee, not too sweet.|Cho mình cà phê đá, ít ngọt thôi.|Not too sweet là cách xin bớt đường.",
+  "Is this seat free?|Chỗ này trống chứ ạ?|Free ở đây nghĩa là chưa có ai ngồi.",
+  "Sorry, could you say that again?|Xin lỗi, bạn nói lại được không?|Câu xin nhắc lại lịch sự nhất.",
+  "It's so loud in here, let's move outside.|Trong này ồn quá, mình ra ngoài đi.|Move outside nghĩa là chuyển ra ngoài.",
+  "I should get going soon.|Mình phải về sớm chút.|Get going nghĩa là lên đường, đi về.",
+  "Let's do this again next month.|Tháng sau mình gặp nữa nhé.|Do this again là cách hẹn lần sau.",
+  "I've got the bill, you got it last time.|Lần này mình trả, lần trước bạn trả rồi.|Get the bill nghĩa là thanh toán.",
+];
+
+const List<String> coffeeWords = <String>[
+  "hang out|/hæŋ aʊt/|phr|đi chơi, tụ tập|We hang out most weekends.|Cuối tuần nào bọn mình cũng đi chơi.",
+  "catch up|/kætʃ ʌp/|phr|gặp để hàn huyên|Let's catch up soon.|Hôm nào gặp hàn huyên nhé.",
+  "reschedule|/riːˈskedʒuːl/|v|dời lịch|Can we reschedule for Friday?|Dời sang thứ Sáu được không?",
+  "spontaneous|/spɑːnˈteɪniəs/|adj|ngẫu hứng|It was a spontaneous trip.|Đó là chuyến đi ngẫu hứng.",
+  "venue|/ˈvenjuː/|n|địa điểm tổ chức|The venue is near the station.|Địa điểm gần nhà ga.",
+  "cosy|/ˈkoʊzi/|adj|ấm cúng|It is a small cosy cafe.|Đó là quán cà phê nhỏ ấm cúng.",
+  "crowded|/ˈkraʊdɪd/|adj|đông đúc|It gets crowded after seven.|Sau bảy giờ là đông lắm.",
+  "regular|/ˈreɡjələr/|n, adj|khách quen, thường xuyên|I'm a regular there.|Mình là khách quen ở đó.",
+  "treat|/triːt/|n, v|chiêu đãi|Dinner is on me, my treat.|Bữa tối mình mời nhé.",
+  "double-book|/ˌdʌblˈbʊk/|v|trót hẹn trùng giờ|Sorry, I double-booked myself.|Xin lỗi, mình trót hẹn trùng giờ.",
+];
+
+const List<String> coffeeTalk = <String>[
+  "#|Hẹn cà phê cuối tuần|Tin nhắn thoại giữa hai người bạn",
+  "Thảo|Hey, are you around this weekend?|Này, cuối tuần bạn có ở nhà không?",
+  ">Bạn|I am. What do you have in mind?|Có. Bạn định làm gì thế?",
+  "Thảo|Coffee at that place with the rooftop?|Cà phê ở cái quán có sân thượng nhé?",
+  ">Bạn|Love it. Saturday or Sunday?|Thích luôn. Thứ Bảy hay Chủ nhật?",
+  "Thảo|Sunday morning is quieter.|Sáng Chủ nhật vắng hơn.",
+  ">Bạn|Sunday it is. Around nine?|Chốt Chủ nhật. Chín giờ nhé?",
+  "Thảo|Nine is perfect. I'll grab us a table.|Chín giờ là chuẩn. Mình giữ bàn cho.",
+  ">Bạn|See you then. Don't oversleep.|Hẹn gặp. Đừng ngủ quên đấy.",
+];

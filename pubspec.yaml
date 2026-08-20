@@ -1,0 +1,71 @@
+name: language_through_travel
+description: "Language Through Travel — học ngôn ngữ theo từng tình huống du lịch."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  # Cần Flutter 3.32+ (Dart 3.8+) cho Color.withValues và CardThemeData.
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.2
+  shared_preferences: ^2.3.2
+  flutter_tts: ^4.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+
+# --- App icon ---------------------------------------------------------------
+#
+# Ảnh gốc nằm trong assets/ và do tool/generate_icons.py vẽ ra bằng hình học,
+# nên đổi màu thương hiệu chỉ cần sửa vài hằng số rồi chạy lại hai lệnh:
+#
+#   python3 tool/generate_icons.py     # vẽ lại ảnh gốc trong assets/
+#   dart run flutter_launcher_icons    # sinh icon cho 5 nền tảng
+#
+# assets/ ở đây chỉ là ảnh nguồn lúc build. Cố tình KHÔNG khai báo trong
+# `flutter: assets:` bên trên để chúng không bị đóng gói vào app.
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: assets/app_icon.png
+
+  # Android API ≤ 25 hiển thị nguyên ảnh này chứ không tự bo góc, nên dùng bản
+  # đã bo sẵn. Từ API 26 trở lên adaptive icon bên dưới mới là thứ được dùng.
+  min_sdk_android: 21
+  image_path_android: assets/app_icon_rounded.png
+
+  # Adaptive icon: hai lớp rời để launcher tự cắt thành tròn, vuông hay squircle.
+  adaptive_icon_background: assets/app_icon_background.png
+  adaptive_icon_foreground: assets/app_icon_foreground.png
+  # Ảnh foreground đã tự chừa sẵn vùng an toàn 66% ở giữa, nên phải tắt phần
+  # inset mặc định 16dp của gói — nếu không hình sẽ bị thu nhỏ hai lần.
+  adaptive_icon_foreground_inset: 0
+  # Themed icon Android 13+: hệ thống chỉ đọc kênh alpha rồi tô lại theo màu
+  # hình nền của người dùng, nên ảnh này là bóng đặc chứ không phải ảnh màu.
+  adaptive_icon_monochrome: assets/app_icon_monochrome.png
+
+  web:
+    generate: true
+    image_path: assets/app_icon.png
+    background_color: "#0EA5E9"
+    theme_color: "#0EA5E9"
+
+  windows:
+    generate: true
+    image_path: assets/app_icon.png
+    icon_size: 256
+
+  macos:
+    generate: true
+    image_path: assets/app_icon.png

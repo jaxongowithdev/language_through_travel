@@ -1,0 +1,9 @@
+Phiên bản đầu tiên.
+
+• Bốn chặng du lịch mở khoá lần lượt: sân bay, khách sạn, nhà hàng, taxi
+• Tiếng Anh, Nhật, Hàn, Thái — có phiên âm và nút đọc phát âm
+• Sổ tay tra cứu: tìm kiếm, bộ lọc, đánh dấu câu yêu thích
+• Bốn trò luyện tập, kết quả đều nuôi cùng một lịch ôn
+• Cẩm nang: khẩn cấp, số đếm, tiền bạc, phương hướng, lịch sự, phát âm
+• Lặp lại ngắt quãng, mục tiêu ngày, chuỗi ngày, bản đồ học, huy hiệu
+• Chạy offline hoàn toàn, không tài khoản, không quảng cáo

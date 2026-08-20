@@ -1,0 +1,53 @@
+Hello App Review Team,
+
+Thank you for the review. The information you requested is below, numbered to match your list.
+
+1. SCREEN RECORDING
+A screen recording is attached to this reply. It was captured on a physical iPhone <MODEL> running iOS <VERSION>, starts with a cold launch of the app, and walks through every core feature in the order a real user meets them. The following items from your list do not exist in this app, so they do not appear in the recording: there is no account registration, login or account deletion; there is no paid content, in-app purchase or subscription; there is no user-generated content, so no reporting or blocking mechanism is needed; and the app never requests access to location, contacts, camera, photos, notifications or App Tracking Transparency. It declares no permission usage strings because it requests no permissions.
+
+2. DEVICES AND OPERATING SYSTEMS TESTED
+- iPhone <MODEL>, iOS <VERSION> (physical device)
+- iPhone <MODEL>, iOS <VERSION> (physical device)
+- iPad <MODEL>, iPadOS <VERSION> (physical device)
+
+3. WHAT THE APP DOES AND WHO IT IS FOR
+Language Through Travel teaches travel phrases in the order a trip actually needs them: airport, hotel, restaurant, taxi. The interface is in Vietnamese and the app teaches four target languages: English, Japanese, Korean and Thai.
+
+The problem it solves: phrasebooks are organised like dictionaries, so travellers look a sentence up, use it once and forget it. This app pairs every phrase with a spaced-repetition schedule, so what you study before departure is still available on arrival.
+
+Target audience: Vietnamese speakers preparing for a trip abroad, roughly ages 18-55, from complete beginners to lower-intermediate learners. It is not aimed at children and contains no age-restricted content.
+
+Value: 192 phrases and dialogues written for real situations, offline pronunciation, a searchable phrasebook, four practice games, and a reference guide covering emergencies, numbers, money, directions and etiquette.
+
+4. SETUP AND HOW TO REACH EVERY FEATURE
+No account, no login and no demo credentials are required. No sample files are needed. Install and open.
+
+On first launch the app asks which language you want to learn. Pick any one; all four are fully populated.
+
+IMPORTANT, so nothing looks broken: the four journey stages unlock in sequence. Only "Sân bay" (Airport) is open at the start. A stage unlocks once the previous one reaches 50 percent, which means opening 6 of its 12 phrases in the Flashcard screen and rating each one. Tapping a locked stage shows an explanatory message; this is intended behaviour, not an error.
+
+The five bottom tabs, left to right:
+- Hành trình (Journey): the four stages, daily goal, streak.
+- Sổ tay (Phrasebook): every phrase, searchable and filterable, with a star for favourites. Nothing is locked here, so this tab is the fastest way to see the full content.
+- Luyện tập (Practice): the review session plus four games. Games need at least 4-6 phrases in the selected pool; choose the "Tất cả" (All) pool to play immediately.
+- Cẩm nang (Guide): six reference topics, all unlocked.
+- Tiến độ (Progress): statistics, badges and settings.
+
+The speaker icon uses the system text-to-speech voice. If the test device has no installed voice for the selected language, iOS returns nothing and the app stays silent rather than showing an error. Thai and Korean voices are often absent by default. Installing a voice under Settings > Accessibility > Spoken Content > Voices makes it audible. English is available on every device, so we suggest reviewing with English selected.
+
+5. EXTERNAL SERVICES, TOOLS AND PLATFORMS
+None. The app makes no network requests of any kind. It has no backend, no analytics, no advertising SDK, no authentication provider, no payment processor and no AI or machine-learning service. All learning content is bundled inside the binary as static Dart files and is available with the device in Airplane Mode.
+
+The only system service used is Apple's on-device speech synthesiser (AVSpeechSynthesizer), reached through the open-source Flutter plugin flutter_tts, and only when the user taps a speaker button. No text is sent anywhere by the app itself.
+
+Third-party open-source packages: provider (state management), shared_preferences (local key-value storage), flutter_tts (system speech). All progress is stored locally via shared_preferences and never leaves the device. Nothing is collected, so the privacy questionnaire is set to "Data Not Collected".
+
+6. REGIONAL DIFFERENCES
+None. The app behaves identically in every region and storefront. There is no geo-detection, no region gating, no remote configuration and no server-side content, because the app is fully offline. Every user receives the same bundled content regardless of country, device region or system language.
+
+7. REGULATED INDUSTRY AND THIRD-PARTY MATERIAL
+Not applicable. The app operates in no regulated industry: it offers no financial, medical, legal, gambling, health, dating or government services. It contains no protected third-party material. All phrases, dialogues, cultural notes, icons and artwork were written and produced by us and are original. No third-party trademarks, copyrighted text, licensed course material or brand names are used, and no third-party content is displayed.
+
+We have added this information to the Notes field of the App Review Information section for future submissions. Please let us know if anything else would help.
+
+Thank you for your time.

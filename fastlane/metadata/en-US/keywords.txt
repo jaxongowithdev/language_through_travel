@@ -1,0 +1,1 @@
+phrasebook,english,japanese,korean,thai,flashcards,spaced,repetition,tourist,abroad,hotel,speak

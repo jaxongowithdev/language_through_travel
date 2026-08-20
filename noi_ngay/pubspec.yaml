@@ -1,0 +1,64 @@
+name: noi_ngay
+description: "Nói Ngay — luyện phản xạ tiếng Anh giao tiếp hằng ngày cho người Việt."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  # Cần Flutter 3.32+ (Dart 3.8+) cho Color.withValues và CardThemeData.
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.2
+  shared_preferences: ^2.3.2
+  flutter_tts: ^4.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+
+# --- App icon ---------------------------------------------------------------
+#
+# Ảnh gốc trong assets/ do tool/generate_icons.py vẽ bằng hình học thuần, nên
+# đổi màu thương hiệu chỉ cần sửa vài hằng số ở đầu script rồi chạy lại:
+#
+#   python3 tool/generate_icons.py     # vẽ lại ảnh gốc vào assets/
+#   dart run flutter_launcher_icons    # sinh icon cho mọi nền tảng
+#
+# assets/ chỉ là ảnh nguồn lúc build, cố tình KHÔNG khai báo trong
+# `flutter: assets:` để không bị đóng gói vào app.
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: assets/app_icon.png
+
+  min_sdk_android: 21
+  image_path_android: assets/app_icon_rounded.png
+
+  adaptive_icon_background: assets/app_icon_background.png
+  adaptive_icon_foreground: assets/app_icon_foreground.png
+  adaptive_icon_foreground_inset: 0
+  adaptive_icon_monochrome: assets/app_icon_monochrome.png
+
+  web:
+    generate: true
+    image_path: assets/app_icon.png
+    background_color: "#0B0F1F"
+    theme_color: "#7C3AED"
+
+  windows:
+    generate: true
+    image_path: assets/app_icon.png
+    icon_size: 256
+
+  macos:
+    generate: true
+    image_path: assets/app_icon.png
